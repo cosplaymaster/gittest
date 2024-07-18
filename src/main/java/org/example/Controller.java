@@ -6,6 +6,8 @@ import org.example.mapper.StudentMapper;
 import org.example.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -38,12 +40,15 @@ public class Controller {
         Student student1 = gson.fromJson(student, Student.class);
         studentMapper.deleteById(student1);
     }
-    @GetMapping("/insert")
-    public void insert() {
+    @PostMapping("/add")
+    public void addStudent(@RequestBody Student student) {
 
-        String student="{\"id\":8,\"name\":\"小唐\",\"score\":\"30\"}";
-        Student student1 = gson.fromJson(student, Student.class);
-        studentMapper.insert(student1);
+        //String student="{\"id\":8,\"name\":\"小唐\",\"score\":\"30\"}";
+        //Student student1 = gson.fromJson(student, Student.class);
+        studentMapper.insert(student);
     }
-
+    @PostMapping("/update")
+    public void updateStudent(@RequestBody Student student) {
+        studentMapper.updateById(student);
+    }
 }
